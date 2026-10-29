@@ -61,9 +61,7 @@ zero-to-hero tutorial for anyone who has never opened Visual Studio before.* �
 - 🔒 **HTML-encoded output** (`Server.HtmlEncode`) in the confirmation message, preventing
   reflected markup/script injection.
 - 📚 **A full "from zero" learning path** below — every click a beginner needs in Visual
-  Studio, in order, with a real screenshot for nearly every step (sourced from the EMSI
-  DotNet Maarif workshop this project follows, plus live captures of this repo actually
-  running).
+  Studio, in order, with real screenshots of this repository actually running.
 
 ---
 
@@ -386,15 +384,6 @@ where child pages inject their own content. Because `WebForm1.aspx` lives inside
 > creating a new project, do not pick an "ASP.NET Core" template — it is a different technology
 > and will not match this lab.
 
-This exact repository, open in **Visual Studio Enterprise 2026 Insiders**:
-
-![This repository open in Visual Studio Enterprise 2026 Insiders](docs/screenshots/vs2026-code-editor-en.png)
-
-> 🖼️ A live capture of this project's `Site.Master` in the editor. The project content —
-> code, file names — is English throughout; the IDE's own menu chrome is French because that is
-> this machine's configured Visual Studio display language (the project itself does not depend
-> on it in any way).
-
 ---
 
 ## 🚀 Quick Start
@@ -417,45 +406,25 @@ If you are new to Visual Studio or ASP.NET Web Forms, continue to the full tutor
 
 ## 🎓 Full Beginner Tutorial — From Zero to Running App
 
-Every screenshot in this tutorial is a **real capture**, either from the EMSI DotNet Maarif
-workshop this project follows, or from this exact repository running.
-
 ### Part A — Install Visual Studio
 
 1. Download **Visual Studio** from the official Visual Studio website (Community edition is
    free and sufficient).
 2. Run the installer and open the **"Workloads"** tab.
 3. Check **"ASP.NET and web development"**.
-
-   ![Visual Studio Installer — ASP.NET and web development workload checked](docs/screenshots/vs-installer-workloads.png)
-
-4. Open the **"Individual components"** tab and confirm **"Modèles d'éléments et de projets
-   .NET Framework"** (*".NET Framework project and item templates"*) is checked.
-
-   ![Visual Studio Installer — individual components](docs/screenshots/vs-installer-components.png)
-
+4. Open the **"Individual components"** tab and confirm **".NET Framework project and item
+   templates"** is checked.
 5. Click **Install** (or **Modify**, if Visual Studio is already installed) and wait for it to
    finish, then launch Visual Studio.
 
 ### Part B — Create (or open) the project
 
 6. From the Visual Studio start screen, click **"Create a new project"**.
-
-   ![Visual Studio start screen — Create a new project](docs/screenshots/vs-start-screen-create-project.png)
-
 7. Search for the **"ASP.NET Web Application (.NET Framework)"** template (C#), name the
    project, choose a location, and select **.NET Framework 4.8**.
-
-   ![Configure your new project dialog](docs/screenshots/vs-configure-new-project.png)
-
 8. In the template picker, choose **"Web Forms"**, then click **Create**.
-
-   ![Create ASP.NET web application dialog — Web Forms template](docs/screenshots/vs-create-webforms-template.png)
-
 9. Visual Studio generates the solution. In **Solution Explorer**, you'll see the project tree
    with `Web.config`, `packages.config`, and the default folders.
-
-   ![Solution Explorer after project creation](docs/screenshots/vs-solution-explorer-lab.png)
 
 > For **this repository specifically**, skip steps 6–9 and instead clone it (see
 > [Quick Start](#-quick-start)) — the project already exists.
@@ -464,15 +433,9 @@ workshop this project follows, or from this exact repository running.
 
 10. Right-click the project → **Add** → **New Item** → select **Web Form**, name it, and click
     **Add**.
-
-    ![Add New Item dialog — Web Form selected](docs/screenshots/vs-add-new-webform-item.png)
-
 11. Build the form markup with server controls (`asp:TextBox`, `asp:DropDownList`,
     `asp:Button`, validators) as shown in [Key Files Walkthrough](#-key-files-walkthrough) and
-    [How the Code Works](#-how-the-code-works-for-beginners) above. Here is what the generated
-    page looks like in the Visual Studio designer, mid-build:
-
-    ![Form rendered in the Visual Studio designer](docs/screenshots/vs-designer-preview.png)
+    [How the Code Works](#-how-the-code-works-for-beginners) above.
 
 ### Part D — Run and test
 
@@ -520,10 +483,6 @@ yourself to confirm the app behaves identically:
 
 ![WebForm1 with Bootstrap navbar layout](docs/screenshots/webform1-bootstrap-layout.png)
 
-### Reference: the original workshop result
-
-![Original workshop lab, completed in French](docs/screenshots/workshop-reference-result.png)
-
 ---
 
 ## 🐞 Troubleshooting
@@ -533,8 +492,6 @@ yourself to confirm the app behaves identically:
 | *"WebForms UnobtrusiveValidationMode requires a ScriptResourceMapping for 'jquery'..."* | The default unobtrusive validation mode expects a jQuery script mapping that isn't configured in this minimal project. | Add the `appSettings` entry below to `Web.config`. |
 | An obviously malformed email is accepted on `WebForm1.aspx` | That page only declares a `RequiredFieldValidator` for the email field — no format validator | Expected behavior for this page (see [comparison table](#-contactformaspx-vs-webform1aspx)); use `ContactForm.aspx` if you need format checking. |
 | `MSB1008` / command-line build errors mentioning stray paths | Running MSBuild from a Unix-style shell (e.g. Git Bash) mangles `/p:` style switches | Run MSBuild from PowerShell or the Developer Command Prompt instead. |
-
-![Actual UnobtrusiveValidationMode error, as it appears in the browser](docs/screenshots/troubleshooting-unobtrusive-validation-error.png)
 
 ```xml
 <appSettings>
@@ -573,10 +530,9 @@ as part of an ASP.NET Web Forms introductory lab.
 
 ## 🙌 Acknowledgments
 
-- The lab and several Visual Studio screenshots in this README are sourced from the **EMSI
-  DotNet Maarif** workshop materials: *"Installation Visual Studio 2022"* and *"Prise en main
-  DotNet Web Form — Visual Studio 2022"*.
-- Live application screenshots were captured by actually running this repository locally.
+- This lab follows the structure of the **EMSI DotNet Maarif** ASP.NET Web Forms workshop.
+- Every screenshot in this README is a live, English-language capture of this repository
+  actually running.
 
 ---
 
