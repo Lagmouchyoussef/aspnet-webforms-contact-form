@@ -386,6 +386,15 @@ where child pages inject their own content. Because `WebForm1.aspx` lives inside
 > creating a new project, do not pick an "ASP.NET Core" template — it is a different technology
 > and will not match this lab.
 
+This exact repository, open in **Visual Studio Enterprise 2026 Insiders**:
+
+![This repository open in Visual Studio Enterprise 2026 Insiders](docs/screenshots/vs2026-code-editor-en.png)
+
+> 🖼️ A live capture of this project's `Site.Master` in the editor. The project content —
+> code, file names — is English throughout; the IDE's own menu chrome is French because that is
+> this machine's configured Visual Studio display language (the project itself does not depend
+> on it in any way).
+
 ---
 
 ## 🚀 Quick Start
@@ -568,3 +577,11 @@ as part of an ASP.NET Web Forms introductory lab.
   DotNet Maarif** workshop materials: *"Installation Visual Studio 2022"* and *"Prise en main
   DotNet Web Form — Visual Studio 2022"*.
 - Live application screenshots were captured by actually running this repository locally.
+
+---
+
+<div align="center">
+
+**Youssef Lagmouch**
+
+</div>
