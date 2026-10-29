@@ -232,7 +232,7 @@ stateDiagram-v2
 ## Project Structure
 
 ```
-TPWebForms/
+aspnet-webforms-contact-form/
 ├── ContactForm.aspx              # Standalone contact form (markup) — full validation
 ├── ContactForm.aspx.cs           # Code-behind: submit handler logic
 ├── ContactForm.aspx.designer.cs  # Auto-generated control declarations
@@ -246,9 +246,14 @@ TPWebForms/
 ├── packages.config               # NuGet package references
 ├── TPWebForms.csproj             # Project file (.NET Framework 4.8)
 ├── TPWebForms.slnx               # Visual Studio solution file
+├── .gitignore                    # Excludes bin/, obj/, .vs/, packages/ (restored at build time)
+├── docs/
+│   └── screenshots/              # Real screenshots used throughout this README
 └── Properties/
     └── AssemblyInfo.cs
 ```
+
+> `bin/`, `obj/`, `.vs/`, and `packages/` are intentionally **not** committed — they are build output and restored NuGet packages, regenerated automatically the first time you build the solution.
 
 ---
 
@@ -301,11 +306,13 @@ While exploring the live application to capture the screenshots above, a real be
 For readers already comfortable with Visual Studio:
 
 ```text
-1. Open TPWebForms.slnx (or TPWebForms.sln) in Visual Studio.
-2. Right-click the solution → Restore NuGet Packages (if prompted).
-3. Right-click ContactForm.aspx or WebForm1.aspx → Set As Start Page.
-4. Press F5 (debug) or Ctrl+F5 (no debug).
-5. Visual Studio launches IIS Express and opens your default browser.
+1. Clone this repository:
+   git clone https://github.com/Lagmouchyoussef/aspnet-webforms-contact-form.git
+2. Open TPWebForms.slnx (or TPWebForms.sln) in Visual Studio.
+3. Right-click the solution → Restore NuGet Packages (first build will do this automatically too).
+4. Right-click ContactForm.aspx or WebForm1.aspx → Set As Start Page.
+5. Press F5 (debug) or Ctrl+F5 (no debug).
+6. Visual Studio launches IIS Express and opens your default browser.
 ```
 
 If you are new to Visual Studio or ASP.NET Web Forms, continue to the [Full Beginner Tutorial](#full-beginner-tutorial) below.

@@ -1,0 +1,15 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# NuGet (restored via packages.config at build time)
+packages/
+
+# IIS Express / publish artifacts
+*.pubxml.user
+PublishProfiles/
