@@ -1,144 +1,103 @@
-<div align="center">
+# ASP.NET Web Forms — Contact Form
 
-### 📬 A complete, beginner-friendly ASP.NET Web Forms contact form
+![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-512BD4?logo=dotnet&logoColor=white)
+![Language](https://img.shields.io/badge/Language-C%23-239120?logo=csharp&logoColor=white)
+![ASP.NET Web Forms](https://img.shields.io/badge/ASP.NET-Web%20Forms-0078D4?logo=csharp&logoColor=white)
+![IDE](https://img.shields.io/badge/IDE-Visual%20Studio%20Enterprise%202026%20Insiders-5C2D91?logo=visualstudio&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![Language](https://img.shields.io/badge/Language-C%23-239120?logo=csharp&logoColor=white)](https://learn.microsoft.com/dotnet/csharp/)
-[![ASP.NET Web Forms](https://img.shields.io/badge/ASP.NET-Web%20Forms-0078D4?logo=csharp&logoColor=white)](https://learn.microsoft.com/aspnet/web-forms/overview/)
-[![IIS Express](https://img.shields.io/badge/Server-IIS%20Express-00897B)](https://www.iis.net/downloads/microsoft/iis-express)
-[![IDE](https://img.shields.io/badge/IDE-Visual%20Studio%202022%20%2F%202026-5C2D91?logo=visualstudio&logoColor=white)](https://visualstudio.microsoft.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-*A responsive-free, server-rendered ASP.NET Web Forms project demonstrating server controls,
-server-side validation, the classic postback lifecycle, and a Bootstrap master page — plus a
-zero-to-hero tutorial for anyone who has never opened Visual Studio before.* 🎓
-
-</div>
+A first hands-on lab in **ASP.NET Web Forms**, built with **C# and .NET Framework 4.8** in
+**Visual Studio Enterprise 2026 Insiders**. It creates a single contact form page that
+demonstrates server controls, server-side validation, and the Web Forms postback model —
+no front-end framework, no master page, nothing but the ASP.NET fundamentals.
 
 ---
 
-## 🎬 Demo
+## Table of Contents
 
-| Empty form | Required-field errors | Success confirmation |
-|---|---|---|
-| ![Empty contact form](docs/screenshots/step-05-running-app.png) | ![Validation errors](docs/screenshots/step-06-empty-validation.png) | ![Confirmation message](docs/screenshots/step-09-confirmation.png) |
-
-> 🖼️ These are **real captures of this exact repository**: the project was built with MSBuild,
-> served locally with IIS Express, and driven end-to-end with a headless Chrome session that
-> actually filled the fields and clicked **Submit**. No mockups.
-
----
-
-## 📑 Table of Contents
-
-- [✨ Features](#-features)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🏗️ Architecture (UML / Mermaid)](#️-architecture-uml--mermaid)
-- [📂 Project Structure](#-project-structure)
-- [🧪 Key Files Walkthrough](#-key-files-walkthrough)
-- [🆚 ContactForm.aspx vs WebForm1.aspx](#-contactformaspx-vs-webform1aspx)
-- [🧠 How the Code Works (For Beginners)](#-how-the-code-works-for-beginners)
-- [✅ Prerequisites](#-prerequisites)
-- [🚀 Quick Start](#-quick-start)
-- [🎓 Full Beginner Tutorial — From Zero to Running App](#-full-beginner-tutorial--from-zero-to-running-app)
-- [🖥️ Screenshots](#️-screenshots)
-- [🐞 Troubleshooting](#-troubleshooting)
-- [🗺️ Roadmap](#️-roadmap)
-- [📄 License](#-license)
-- [🙌 Acknowledgments](#-acknowledgments)
+1. [Objectives](#objectives)
+2. [Prerequisites](#prerequisites)
+3. [Project Structure](#project-structure)
+4. [Architecture (UML / Mermaid)](#architecture-uml--mermaid)
+5. [Step 1 — Create the Project](#step-1--create-the-project)
+6. [Step 2 — Build the Form Interface](#step-2--build-the-form-interface)
+7. [Step 3 — Program the Submit Button in C#](#step-3--program-the-submit-button-in-c)
+8. [Step 4 — Run and Test the Application](#step-4--run-and-test-the-application)
+9. [Expected Result](#expected-result)
+10. [How the Code Works](#how-the-code-works)
+11. [Configuration Notes](#configuration-notes)
+12. [Troubleshooting](#troubleshooting)
+13. [Comprehension Questions](#comprehension-questions)
+14. [Suggested Exercises](#suggested-exercises)
+15. [License](#license)
 
 ---
 
-## ✨ Features
+## Objectives
 
-- 🧱 **Two layout variants** of the same form: a self-contained standalone page
-  (`ContactForm.aspx`) and a page sharing a Bootstrap 4 **Master Page** (`WebForm1.aspx` +
-  `Site.Master`).
-- ✅ **Server-side validation** with built-in validator controls — no custom JavaScript:
-  required full name, required + **regex-checked** email, required program selection.
-- 🔄 **Classic ASP.NET postback lifecycle** — the form posts back to itself, runs validators,
-  and re-renders with either error messages or a confirmation banner.
-- 🔒 **HTML-encoded output** (`Server.HtmlEncode`) in the confirmation message, preventing
-  reflected markup/script injection.
-- 📚 **A full "from zero" learning path** below — every click a beginner needs in Visual
-  Studio, in order, with real screenshots of this repository actually running.
+By the end of this lab you will be able to:
+
+- Create an ASP.NET Web Forms project based on .NET Framework, in Visual Studio Enterprise 2026
+  Insiders.
+- Identify the files that make up a Web Forms page: `.aspx` and `.aspx.cs`.
+- Use server controls: `TextBox`, `DropDownList`, `Button`, and `Label`.
+- Understand the postback and how a server-side event is handled.
+- Set up simple server-side validation and test the application in a browser.
 
 ---
 
-## 🛠️ Tech Stack
+## Prerequisites
 
-| Layer | Technology |
+| Requirement | Details |
 |---|---|
-| Language | C# |
-| Framework | ASP.NET Web Forms (.NET Framework **4.8**) |
-| UI Toolkit | Inline CSS / Bootstrap 4 (CDN, via `Site.Master`) |
-| Package manager | NuGet (`packages.config` — classic, non-SDK-style `.csproj`) |
-| Local web server | IIS Express |
-| IDE | Visual Studio 2022 / **Visual Studio Enterprise 2026 Insiders**, workload *ASP.NET and web development* |
-| Build | MSBuild (`Debug` / `Release` configurations, `Web.Debug.config` / `Web.Release.config`) |
+| Operating system | Windows |
+| IDE | **Visual Studio Enterprise 2026 Insiders** (or Visual Studio 2022 Community and above) |
+| Workload | **"ASP.NET and web development"**, installed via the Visual Studio Installer |
+| Component | **".NET Framework project and item templates"**, under Individual Components |
+| Target framework | **.NET Framework 4.8** |
+
+> **Important:** ASP.NET Web Forms runs on **.NET Framework**, not .NET Core / .NET 5+. When
+> creating the project, do not select an "ASP.NET Core" template — it is a different technology.
+
+If the Web Forms template does not appear in Visual Studio, close Visual Studio, open
+**Visual Studio Installer → Modify**, install the **ASP.NET and web development** workload and
+the required .NET Framework components, then relaunch Visual Studio.
 
 ---
 
-## 🏗️ Architecture (UML / Mermaid)
+## Project Structure
 
-### 1️⃣ Use Case Diagram
-
-```mermaid
-flowchart LR
-    User((Visitor))
-
-    UC1([Open the contact form])
-    UC2([Fill in personal details])
-    UC3([Select a program])
-    UC4([Write an optional comment])
-    UC5([Submit the form])
-    UC6([View validation errors])
-    UC7([View confirmation message])
-
-    User --> UC1
-    User --> UC2
-    User --> UC3
-    User --> UC4
-    User --> UC5
-    UC5 --> UC6
-    UC5 --> UC7
+```
+aspnet-webforms-contact-form/
+├── ContactForm.aspx              # The contact form page (markup)
+├── ContactForm.aspx.cs           # Code-behind: Submit button event handler
+├── ContactForm.aspx.designer.cs  # Auto-generated control declarations
+├── Web.config                    # Application configuration
+├── Web.Debug.config              # Debug-specific config transform
+├── Web.Release.config            # Release-specific config transform
+├── packages.config               # NuGet package references
+├── TPWebForms.csproj             # Project file (.NET Framework 4.8)
+├── TPWebForms.slnx               # Visual Studio solution file
+├── .gitignore                    # Excludes bin/, obj/, .vs/, packages/
+├── docs/
+│   └── screenshots/              # Screenshots used throughout this README
+└── Properties/
+    └── AssemblyInfo.cs
 ```
 
-### 2️⃣ Project Structure Diagram
+> `bin/`, `obj/`, `.vs/`, and `packages/` are intentionally not committed — they are build
+> output and restored NuGet packages, regenerated the first time the solution is built.
 
-```mermaid
-flowchart TD
-    Solution[TPWebForms Solution]
+---
 
-    Solution --> SiteMaster[Site.Master<br/>Bootstrap layout]
-    Solution --> ContactForm[ContactForm.aspx<br/>standalone page, full validation]
-    Solution --> WebForm1[WebForm1.aspx<br/>uses Site.Master]
-    Solution --> WebConfig[Web.config<br/>app configuration]
+## Architecture (UML / Mermaid)
 
-    ContactForm --> ContactFormCS[ContactForm.aspx.cs<br/>code-behind]
-    ContactFormCS --> ContactFormDesigner[ContactForm.aspx.designer.cs<br/>auto-generated controls]
-
-    WebForm1 --> WebForm1CS[WebForm1.aspx.cs<br/>code-behind]
-    WebForm1CS --> WebForm1Designer[WebForm1.aspx.designer.cs<br/>auto-generated controls]
-
-    SiteMaster -. MasterPageFile .-> WebForm1
-```
-
-### 3️⃣ Class Diagram — who inherits from what
+### Class Diagram
 
 ```mermaid
 classDiagram
     class Page {
         <<System.Web.UI>>
-    }
-
-    class MasterPage {
-        <<System.Web.UI>>
-    }
-
-    class SiteMaster {
-        +ContentPlaceHolder HeadContent
-        +ContentPlaceHolder MainContent
     }
 
     class ContactForm {
@@ -151,30 +110,17 @@ classDiagram
         +btnSubmit_Click(sender, e) void
     }
 
-    class WebForm1 {
-        +TextBox txtFullName
-        +TextBox txtEmail
-        +DropDownList ddlProgram
-        +TextBox txtComment
-        +Button btnSubmit
-        +Label lblResult
-        +btnSubmit_Click(sender, e) void
-    }
-
-    MasterPage <|-- SiteMaster
     Page <|-- ContactForm
-    Page <|-- WebForm1
-    SiteMaster <.. WebForm1 : rendered inside
 ```
 
-### 4️⃣ Sequence Diagram — postback lifecycle
+### Sequence Diagram — Postback Lifecycle
 
 ```mermaid
 sequenceDiagram
     actor User
     participant Browser
     participant IIS as IIS Express
-    participant Page as Server-side Page
+    participant Page as ContactForm (Server-side)
 
     User->>Browser: Fill fields and click "Submit"
     Browser->>IIS: HTTP POST (form fields + ViewState)
@@ -196,7 +142,7 @@ sequenceDiagram
     end
 ```
 
-### 5️⃣ Activity / State Diagram — validation flow
+### Activity / State Diagram — Validation Flow
 
 ```mermaid
 stateDiagram-v2
@@ -206,7 +152,7 @@ stateDiagram-v2
 
     Submitted --> Validating : Postback triggers validators
 
-    Validating --> Invalid : A required field is empty<br/>or (ContactForm.aspx only)<br/>the email format is wrong
+    Validating --> Invalid : A required field is empty,<br/>or the email format is wrong
     Invalid --> FormDisplayed : Show error messages<br/>(form values preserved)
 
     Validating --> Valid : All validators pass
@@ -218,121 +164,78 @@ stateDiagram-v2
 
 ---
 
-## 📂 Project Structure
+## Step 1 — Create the Project
 
-```
-aspnet-webforms-contact-form/
-├── ContactForm.aspx              # Standalone contact form (markup) — full validation
-├── ContactForm.aspx.cs           # Code-behind: submit handler logic
-├── ContactForm.aspx.designer.cs  # Auto-generated control declarations
-├── WebForm1.aspx                 # Contact form using the master page (markup)
-├── WebForm1.aspx.cs              # Code-behind: submit handler logic
-├── WebForm1.aspx.designer.cs     # Auto-generated control declarations
-├── Site.Master                   # Shared layout with Bootstrap navbar
-├── Web.config                    # Application configuration
-├── Web.Debug.config              # Debug-specific config transform
-├── Web.Release.config            # Release-specific config transform
-├── packages.config               # NuGet package references
-├── TPWebForms.csproj             # Project file (.NET Framework 4.8)
-├── TPWebForms.slnx               # Visual Studio solution file
-├── .gitignore                    # Excludes bin/, obj/, .vs/, packages/ (restored at build time)
-├── docs/
-│   └── screenshots/              # Every screenshot used throughout this README
-└── Properties/
-    └── AssemblyInfo.cs
-```
+1. Open **Visual Studio Enterprise 2026 Insiders**.
+2. Click **"Create a new project"**.
+3. Search for the **"ASP.NET Web Application (.NET Framework)"** template, in C#.
+4. Click **Next**, name the project (e.g. `TPWebForms`), choose a location, and click **Create**.
+5. In the template selection window, choose **"Web Forms"**.
+6. Select an installed **.NET Framework** version (e.g. **4.8**) and confirm creation.
 
-> `bin/`, `obj/`, `.vs/`, and `packages/` are intentionally **not** committed — they are build
-> output and restored NuGet packages, regenerated automatically the first time you build the
-> solution.
+> To work with **this exact repository** instead of starting from scratch, clone it and open
+> `TPWebForms.slnx` directly:
+> ```
+> git clone https://github.com/Lagmouchyoussef/aspnet-webforms-contact-form.git
+> ```
+
+The `Web.config` file contains the application's configuration settings.
 
 ---
 
-## 🧪 Key Files Walkthrough
+## Step 2 — Build the Form Interface
 
-| File | Role |
-|---|---|
-| `ContactForm.aspx` / `.aspx.cs` | Standalone form page — full markup + logic in one pair, no master page |
-| `WebForm1.aspx` / `.aspx.cs` | Same form concept, rendered inside `Site.Master`'s Bootstrap layout |
-| `*.aspx.designer.cs` | Auto-generated field declarations for server controls — never edit by hand |
-| `Site.Master` | Shared page shell: Bootstrap 4 navbar + `HeadContent`/`MainContent` placeholders |
-| `Web.config` | App settings, including the `UnobtrusiveValidationMode` fix (see [Troubleshooting](#-troubleshooting)) |
-| `TPWebForms.csproj` | MSBuild project file targeting `.NET Framework 4.8` |
-| `packages.config` | NuGet package references (e.g. `Microsoft.CodeDom.Providers.DotNetCompilerPlatform`) |
+1. Right-click the project → **Add** → **New Item**.
+2. Select **Web Form**, name it (this project's version is `ContactForm.aspx`), and click **Add**.
+3. Replace the generated markup with server controls for each field, plus a validator next to
+   each one that needs validation:
 
----
+```aspx
+<asp:Label ID="lblFullName" runat="server" AssociatedControlID="txtFullName" Text="Full name:" />
+<asp:TextBox ID="txtFullName" runat="server" CssClass="input" MaxLength="80" />
+<asp:RequiredFieldValidator ID="valFullName" runat="server"
+    ControlToValidate="txtFullName" ErrorMessage="Full name is required."
+    CssClass="error" Display="Dynamic" />
 
-## 🆚 ContactForm.aspx vs WebForm1.aspx
+<asp:Label ID="lblEmail" runat="server" AssociatedControlID="txtEmail" Text="Email address:" />
+<asp:TextBox ID="txtEmail" runat="server" CssClass="input" TextMode="Email" MaxLength="120" />
+<asp:RequiredFieldValidator ID="valEmailRequired" runat="server"
+    ControlToValidate="txtEmail" ErrorMessage="Email address is required."
+    CssClass="error" Display="Dynamic" />
+<asp:RegularExpressionValidator ID="valEmailFormat" runat="server"
+    ControlToValidate="txtEmail" ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+    ErrorMessage="Enter a valid email address." CssClass="error" Display="Dynamic" />
 
-While capturing the screenshots in this README, a real behavioral difference between the two
-pages was confirmed — worth knowing before you use either one as a template:
+<asp:Label ID="lblProgram" runat="server" AssociatedControlID="ddlProgram" Text="Program:" />
+<asp:DropDownList ID="ddlProgram" runat="server" CssClass="input">
+    <asp:ListItem Text="-- Choose a program --" Value="" />
+    <asp:ListItem Text="Computer Engineering" Value="ComputerEngineering" />
+    <asp:ListItem Text="Industrial Engineering" Value="IndustrialEngineering" />
+    <asp:ListItem Text="Networks and Systems" Value="NetworksAndSystems" />
+</asp:DropDownList>
+<asp:RequiredFieldValidator ID="valProgram" runat="server"
+    ControlToValidate="ddlProgram" InitialValue="" ErrorMessage="Choose a program."
+    CssClass="error" Display="Dynamic" />
 
-| Aspect | `ContactForm.aspx` | `WebForm1.aspx` |
-|---|---|---|
-| Layout | Self-contained `<html>` document | Uses `Site.Master` (Bootstrap navbar) |
-| Full name validation | Required | Required |
-| Email validation | **Required + regex format check** | **Required only** — no format/regex validator is declared |
-| Program options | Computer Engineering, Industrial Engineering, Networks and Systems | Computer Engineering, Networks and Systems *(Industrial Engineering is not listed)* |
-| Comment field | Optional, max 500 characters | Optional, max 500 characters |
+<asp:Label ID="lblComment" runat="server" AssociatedControlID="txtComment" Text="Comment:" />
+<asp:TextBox ID="txtComment" runat="server" CssClass="input" TextMode="MultiLine"
+    Rows="4" MaxLength="500" />
 
-> This was verified by posting directly to each page: submitting a syntactically-invalid email
-> to `ContactForm.aspx` correctly triggers *"Enter a valid email address."*, while the same
-> value submitted to `WebForm1.aspx` is silently accepted because no `RegularExpressionValidator`
-> exists on that page. If you build on `WebForm1.aspx`, consider adding the same email-format
-> validator used in `ContactForm.aspx`.
-
----
-
-## 🧠 How the Code Works (For Beginners)
-
-### `.aspx` vs `.aspx.cs` vs `.aspx.designer.cs`
-
-| File | Role |
-|---|---|
-| `WebForm1.aspx` | The **markup** file: HTML plus ASP.NET server control tags (`<asp:TextBox>`, `<asp:Button>`, …). Defines the visual layout. |
-| `WebForm1.aspx.cs` | The **code-behind** file: C# logic that runs on the server, such as the `btnSubmit_Click` event handler. |
-| `WebForm1.aspx.designer.cs` | **Auto-generated** by Visual Studio. It declares one C# field per server control (matched by `ID`) so the code-behind can reference `txtFullName`, `ddlProgram`, etc. **Never edit this file manually.** |
-
-### `runat="server"`
-
-Any HTML/ASP.NET control marked `runat="server"` becomes an object the C# code-behind can read
-and modify (for example `txtFullName.Text`). Without this attribute, a control is just static
-HTML and the server cannot interact with it.
-
-### The postback model
-
-ASP.NET Web Forms uses a **postback**: clicking Submit sends the entire form back to the *same*
-page via an HTTP POST. The server re-creates the page, restores its state (via **ViewState**),
-runs the validators, and then executes the event handler tied to the button
-(`OnClick="btnSubmit_Click"`). The result is rendered back into the same page — see the
-[sequence diagram](#️-architecture-uml--mermaid) above for the full flow.
-
-### Validator controls
-
-Instead of manual `if` checks in C#, the markup declares validator controls next to each input:
-
-- `RequiredFieldValidator` — blocks submission if the associated field is empty.
-- `RegularExpressionValidator` — checks the email field against
-  `^[^@\s]+@[^@\s]+\.[^@\s]+$`. **Only present on `ContactForm.aspx`** (see the
-  [comparison table](#-contactformaspx-vs-webform1aspx) above).
-
-Before processing any data, the code-behind checks:
-
-```csharp
-if (!Page.IsValid)
-{
-    lblResult.Text = "";
-    return;
-}
+<asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="button" OnClick="btnSubmit_Click" />
+<asp:Label ID="lblResult" runat="server" CssClass="success" EnableViewState="false" />
 ```
 
-`Page.IsValid` becomes `true` only if every validator on the page passed.
+---
 
-### The submit handler
+## Step 3 — Program the Submit Button in C#
+
+Double-click the **Submit** button in the designer to generate its `Click` event handler in the
+code-behind file:
 
 ```csharp
 protected void btnSubmit_Click(object sender, EventArgs e)
 {
+    // Server-side check of the validator controls.
     if (!Page.IsValid)
     {
         lblResult.Text = "";
@@ -344,154 +247,102 @@ protected void btnSubmit_Click(object sender, EventArgs e)
     string program = ddlProgram.SelectedItem.Text;
     string comment = txtComment.Text.Trim();
 
+    // The Label control HTML-encodes the text it displays.
     lblResult.Text = "Thank you " + Server.HtmlEncode(fullName) +
                      "! Your form was processed. " +
                      "Program: " + Server.HtmlEncode(program) +
                      ". A summary could be sent to " +
                      Server.HtmlEncode(email) + ".";
 
-    // The comment is read, but the submitted information is not stored.
+    // The comment is read to demonstrate retrieving multi-line input.
+    // No data is stored.
 }
 ```
 
-- `Server.HtmlEncode(...)` escapes any HTML/script characters the user typed, so the
-  confirmation message cannot be used to inject markup into the page.
-- The comment is read purely to demonstrate retrieving multi-line input — it is not persisted.
-- `lblResult` has `EnableViewState="false"`, so its text is not remembered across further
-  postbacks unless explicitly set again.
-
-### The Master Page (`Site.Master`)
-
-`WebForm1.aspx` declares `MasterPageFile="~/Site.Master"`. The master page defines the outer
-HTML shell, the Bootstrap 4 navbar, and two placeholders — `HeadContent` and `MainContent` —
-where child pages inject their own content. Because `WebForm1.aspx` lives inside
-`MainContent`, its rendered control IDs are prefixed (e.g. `MainContent_txtEmail`).
-`ContactForm.aspx` does **not** use a master page, so its IDs have no prefix.
+**Key takeaways:** any ASP.NET control with `runat="server"` is accessible from the C# code
+behind it. The `OnClick` attribute connects the button to `btnSubmit_Click`. `Page.IsValid`
+lets you check every validator on the page before processing its fields.
 
 ---
 
-## ✅ Prerequisites
+## Step 4 — Run and Test the Application
 
-| Tool | Why you need it |
+1. Save all files (**Ctrl+S**).
+2. In **Solution Explorer**, right-click `ContactForm.aspx` and choose **"Set As Start Page"**
+   if needed.
+3. Launch the application with **F5** (debug) or **Ctrl+F5** (no debug). Visual Studio starts
+   **IIS Express** and opens your browser.
+4. Submit the form with every required field filled in.
+5. Click **Submit** while leaving the full name empty — a validation message should appear.
+6. Enter an incorrect email address, or leave the program unselected — the validators should
+   flag the error.
+7. Change the comment and submit again, to observe the form's behavior.
+
+---
+
+## Expected Result
+
+The page displays a title, four input areas (name, email, program, and comment), and a
+**Submit** button. After a valid submission, a confirmation message appears below the button.
+Invalid input is flagged without leaving the page.
+
+| Empty form | Required-field errors |
 |---|---|
-| Windows computer | Visual Studio + IIS Express are Windows-only |
-| **Visual Studio 2022 (Community+)** or **Visual Studio Enterprise 2026 Insiders** | IDE used to build and run the project |
-| **"ASP.NET and web development"** workload | Installed via the Visual Studio Installer; required for Web Forms templates |
-| **".NET Framework project and item templates"** component | Makes the Web Forms project template available |
-| **.NET Framework 4.8** | Target framework of this project |
+| ![Empty contact form](docs/screenshots/step-05-running-app.png) | ![Validation errors](docs/screenshots/step-06-empty-validation.png) |
 
-> ⚠️ **Important:** ASP.NET Web Forms runs on **.NET Framework**, not .NET Core / .NET 5+. When
-> creating a new project, do not pick an "ASP.NET Core" template — it is a different technology
-> and will not match this lab.
+| Invalid email rejected | Form filled correctly |
+|---|---|
+| ![Invalid email format error](docs/screenshots/step-07-invalid-email.png) | ![Form filled correctly before submit](docs/screenshots/step-08-filled-correctly.png) |
 
----
+**Successful submission:**
 
-## 🚀 Quick Start
+![Success confirmation message](docs/screenshots/step-09-confirmation.png)
 
-For readers already comfortable with Visual Studio:
+> These are real captures of this repository: built with MSBuild, served locally with IIS
+> Express, and exercised end to end through the actual Submit button.
 
-```text
-1. Clone this repository:
-   git clone https://github.com/Lagmouchyoussef/aspnet-webforms-contact-form.git
-2. Open TPWebForms.slnx (or TPWebForms.sln) in Visual Studio.
-3. Right-click the solution → Restore NuGet Packages (first build will do this automatically too).
-4. Right-click ContactForm.aspx or WebForm1.aspx → Set As Start Page.
-5. Press F5 (debug) or Ctrl+F5 (no debug).
-6. Visual Studio launches IIS Express and opens your default browser.
-```
-
-If you are new to Visual Studio or ASP.NET Web Forms, continue to the full tutorial below.
+**Deliberate limitation of this lab:** submitted information is only processed for the
+duration of the request. It is not saved to a file or a database — this is not a real
+registration system.
 
 ---
 
-## 🎓 Full Beginner Tutorial — From Zero to Running App
+## How the Code Works
 
-### Part A — Install Visual Studio
+### `.aspx` vs `.aspx.cs` vs `.aspx.designer.cs`
 
-1. Download **Visual Studio** from the official Visual Studio website (Community edition is
-   free and sufficient).
-2. Run the installer and open the **"Workloads"** tab.
-3. Check **"ASP.NET and web development"**.
-4. Open the **"Individual components"** tab and confirm **".NET Framework project and item
-   templates"** is checked.
-5. Click **Install** (or **Modify**, if Visual Studio is already installed) and wait for it to
-   finish, then launch Visual Studio.
+| File | Role |
+|---|---|
+| `ContactForm.aspx` | The **markup** file: HTML plus ASP.NET server control tags. Defines the visual layout. |
+| `ContactForm.aspx.cs` | The **code-behind** file: C# logic that runs on the server, such as `btnSubmit_Click`. |
+| `ContactForm.aspx.designer.cs` | **Auto-generated** by Visual Studio: declares one C# field per server control so the code-behind can reference `txtFullName`, `ddlProgram`, etc. Never edit this file by hand. |
 
-### Part B — Create (or open) the project
+### `runat="server"`
 
-6. From the Visual Studio start screen, click **"Create a new project"**.
-7. Search for the **"ASP.NET Web Application (.NET Framework)"** template (C#), name the
-   project, choose a location, and select **.NET Framework 4.8**.
-8. In the template picker, choose **"Web Forms"**, then click **Create**.
-9. Visual Studio generates the solution. In **Solution Explorer**, you'll see the project tree
-   with `Web.config`, `packages.config`, and the default folders.
+Any control marked `runat="server"` becomes an object the C# code-behind can read and modify
+(for example `txtFullName.Text`). Without this attribute, a control is static HTML and the
+server cannot interact with it.
 
-> For **this repository specifically**, skip steps 6–9 and instead clone it (see
-> [Quick Start](#-quick-start)) — the project already exists.
+### The postback model
 
-### Part C — Add a Web Form (if starting from scratch)
+ASP.NET Web Forms uses a **postback**: clicking Submit sends the entire form back to the
+*same* page through an HTTP POST. The server restores the page's state through **ViewState**,
+runs the validators, and executes the handler tied to the button (`OnClick="btnSubmit_Click"`).
+The result is rendered back into the same page.
 
-10. Right-click the project → **Add** → **New Item** → select **Web Form**, name it, and click
-    **Add**.
-11. Build the form markup with server controls (`asp:TextBox`, `asp:DropDownList`,
-    `asp:Button`, validators) as shown in [Key Files Walkthrough](#-key-files-walkthrough) and
-    [How the Code Works](#-how-the-code-works-for-beginners) above.
+### Validator controls
 
-### Part D — Run and test
+- `RequiredFieldValidator` blocks submission when its field is empty.
+- `RegularExpressionValidator` checks the email field against
+  `^[^@\s]+@[^@\s]+\.[^@\s]+$`.
 
-12. Right-click `ContactForm.aspx` (or `WebForm1.aspx`) → **"Set As Start Page"**.
-13. Press **F5** (debug) or **Ctrl+F5** (no debug). Visual Studio starts **IIS Express** and
-    opens your browser.
-14. Test the full scenario below in [Screenshots](#️-screenshots).
+Both run automatically on postback; `Page.IsValid` is `true` only when every validator passed.
 
 ---
 
-## 🖥️ Screenshots
+## Configuration Notes
 
-This is the exact scenario sequence used to produce the captures in this README — reproduce it
-yourself to confirm the app behaves identically:
-
-1. **Load the page.** Observe the title, the four fields (Full name, Email address, Program,
-   Comment) and the **Submit** button.
-
-   ![Empty contact form](docs/screenshots/step-05-running-app.png)
-
-2. **Submit the empty form.** Click **Submit** without typing anything — every required field
-   shows its own red validation message.
-
-   ![Required-field validation errors](docs/screenshots/step-06-empty-validation.png)
-
-3. **Enter a syntactically-invalid email** (missing a dot), fill the other required fields, and
-   submit — on `ContactForm.aspx` the format validator blocks it.
-
-   ![Invalid email format rejected](docs/screenshots/step-07-invalid-email.png)
-
-4. **Fill the form correctly**: full name, a valid email, a selected program, and an optional
-   comment.
-
-   ![Form filled correctly before submit](docs/screenshots/step-08-filled-correctly.png)
-
-5. **Click Submit.** A confirmation message appears below the button, repeating the submitted
-   name, program, and email.
-
-   ![Success confirmation message](docs/screenshots/step-09-confirmation.png)
-
-6. **Change the comment and submit again** to confirm the form can be resubmitted and the
-   confirmation message updates accordingly.
-
-### Bootstrap layout variant (`WebForm1.aspx`)
-
-![WebForm1 with Bootstrap navbar layout](docs/screenshots/webform1-bootstrap-layout.png)
-
----
-
-## 🐞 Troubleshooting
-
-| Symptom | Cause | Fix |
-|---|---|---|
-| *"WebForms UnobtrusiveValidationMode requires a ScriptResourceMapping for 'jquery'..."* | The default unobtrusive validation mode expects a jQuery script mapping that isn't configured in this minimal project. | Add the `appSettings` entry below to `Web.config`. |
-| An obviously malformed email is accepted on `WebForm1.aspx` | That page only declares a `RequiredFieldValidator` for the email field — no format validator | Expected behavior for this page (see [comparison table](#-contactformaspx-vs-webform1aspx)); use `ContactForm.aspx` if you need format checking. |
-| `MSB1008` / command-line build errors mentioning stray paths | Running MSBuild from a Unix-style shell (e.g. Git Bash) mangles `/p:` style switches | Run MSBuild from PowerShell or the Developer Command Prompt instead. |
+`Web.config` contains this setting:
 
 ```xml
 <appSettings>
@@ -499,40 +350,46 @@ yourself to confirm the app behaves identically:
 </appSettings>
 ```
 
-The `UnobtrusiveValidationMode` setting relies on jQuery being correctly mapped as a script
-resource. For a first lab focused on **server-side** validators, setting this mode to `None`
-avoids the error above and keeps the example simple.
+By default, ASP.NET Web Forms uses unobtrusive client-side validation, which relies on jQuery
+being mapped as a script resource. Setting this mode to `None` avoids that requirement and
+keeps this lab focused on **server-side** validators.
 
 ---
 
-## 🗺️ Roadmap
+## Troubleshooting
 
-- [ ] Add a **"Phone number"** field, required.
-- [ ] Add an **"Education level"** dropdown list.
-- [ ] Add a **"Reset"** button that clears all fields and the confirmation message.
-- [ ] Show a more complete summary of all submitted information (including the comment).
-- [ ] Add a **live character counter** for the comment field (maximum 500 characters).
-- [ ] Bring `WebForm1.aspx` to parity with `ContactForm.aspx`: add the missing email-format
-      validator and the missing "Industrial Engineering" program option.
-
-**Known, deliberate limitations:** no persistence (data lives only for the duration of the
-request), no authentication, and no anti-forgery token — this is a teaching lab, not a
-production registration system.
+| Symptom | Cause | Fix |
+|---|---|---|
+| *"WebForms UnobtrusiveValidationMode requires a ScriptResourceMapping for 'jquery'..."* | The default unobtrusive validation mode expects a jQuery mapping not configured in this project. | Add the `appSettings` entry shown in [Configuration Notes](#configuration-notes) to `Web.config`. |
+| `MSB1008` / command-line build errors mentioning stray paths | Running MSBuild from a Unix-style shell (e.g. Git Bash) mangles `/p:` style switches. | Run MSBuild from PowerShell or the Developer Command Prompt instead. |
+| Web Forms template missing from the New Project dialog | The ASP.NET and web development workload is not installed. | Open Visual Studio Installer → Modify → check **ASP.NET and web development** → Modify. |
 
 ---
 
-## 📄 License
+## Comprehension Questions
+
+1. What is the difference between `ContactForm.aspx` and `ContactForm.aspx.cs`?
+2. What does the `runat="server"` attribute do?
+3. What role does the `btnSubmit_Click` event play?
+4. Why does the code check `Page.IsValid` before processing the submitted fields?
+5. What happens if the browser is closed after submitting the form? Is the data kept? Why?
+
+---
+
+## Suggested Exercises
+
+- Add a **"Phone number"** field and make it required.
+- Add a **"Education level"** dropdown list.
+- Add a **"Reset"** button that clears all fields and the confirmation message.
+- Display a more complete summary of all submitted information, including the comment.
+- Add a live character counter for the comment field (maximum 500 characters).
+
+---
+
+## License
 
 This project is distributed under the **MIT License** and is intended for educational purposes
 as part of an ASP.NET Web Forms introductory lab.
-
----
-
-## 🙌 Acknowledgments
-
-- This lab follows the structure of the **EMSI DotNet Maarif** ASP.NET Web Forms workshop.
-- Every screenshot in this README is a live, English-language capture of this repository
-  actually running.
 
 ---
 
